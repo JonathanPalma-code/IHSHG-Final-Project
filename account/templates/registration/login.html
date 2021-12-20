@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+
+<h1>Log-in</h1>
+
+<div class="login-form">
+    <form action="{% url 'login' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="text" value="{{ next }}" />
+        <!-- {% if form.errors %}
+            <p>
+                Please enter a correct username and password. Note that both fields may be case-sensitive.
+            </p>
+        {% endif %} -->
+        <p><input type="submit" value="Log-in"></p>
+    </form>
+</div>
+
+{% endblock %}
