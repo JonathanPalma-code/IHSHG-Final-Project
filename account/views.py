@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from typing import NewType
+from django.contrib.auth.models import User
+from django.shortcuts import render, resolve_url
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 
 def login_view(request):
     if request.method == "POST":
@@ -28,3 +30,4 @@ def login_view(request):
 @login_required
 def home(request):
     return render(request, 'account/index.html', {'section': 'dashboard'})
+    
