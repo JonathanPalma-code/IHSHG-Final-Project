@@ -1,17 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages  # import messages
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.db.models.query_utils import Q
+from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordResetForm
 from django.http import HttpResponse
+from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 from django.contrib import messages
 
-@login_required
 def home(request):
-    return render(request, 'account/index.html', {'section': 'dashboard'})
+    user_form = UserRegistrationForm()
+    return render(request, 'account/index.html', {
+        'user_form': user_form,
+        'section': 'dashboard'
+        })
 
 @login_required
-def edit(request):
+def edit_profile(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile,
@@ -24,15 +36,48 @@ def edit(request):
             messages.success(request, 'Profile updated successfully!')
         else:
             messages.error(request, 'Error updating your profile.')
-    
+
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    
+
     return render(request, 'account/edit.html', {
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+def password_reset_view(request):
+	if request.method == "POST":
+		password_reset_form = PasswordResetForm(request.POST)
+		if password_reset_form.is_valid():
+			data = password_reset_form.cleaned_data['email']
+			associated_users = User.objects.filter(Q(email=data))
+			if associated_users.exists():
+				for user in associated_users:
+					subject = "Password Reset Requested"
+					email_template_name = "registration/password_reset_email.html"
+					c = {
+                        "user": user,
+                        "email": user.email,
+                        'domain': '127.0.0.1:8000',
+                        'site_name': 'Website',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+					}
+					email = render_to_string(email_template_name, c)
+					try:
+						send_mail(subject, email, 'noreply_ihshg@outlook.com',
+						          [user.email], fail_silently=False)
+					except BadHeaderError:
+						return HttpResponse('Invalid header found.')
+
+					messages.success(
+					    request, 'A message with reset password instructions has been sent to your inbox.')
+					return redirect("index")
+			messages.error(request, 'An invalid email has been entered.')
+	password_reset_form = PasswordResetForm()
+	return render(request, 'registration/password_reset_form.html', {"password_reset_form": password_reset_form})
 
 def login_view(request):
     if request.method == "POST":
@@ -46,16 +91,16 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Authenticated successfuly')
+                    return render(request, 'account/index.html')
                 else:
-                    return HttpResponse('Disabled Account')
+                    return HttpResponse('Verify your account.')
             else:
-                return HttpResponse("Invalid Login")
+                return render(request, 'registration/login.html', { 'login_form': form, 'error': True })
     else:
         form = LoginForm()
     return render(request, 'registration/login.html', { 'login_form': form })
 
-def register(request):
+def register_view(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():

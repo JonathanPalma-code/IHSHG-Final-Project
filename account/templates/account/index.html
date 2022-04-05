@@ -4,7 +4,26 @@
 
 {% block content %}
 
-<h1>Dashboard</h1>
-<p>Welcome to your space. You can <a href="{% url 'edit'%}">edit yout profile</a> or <a href="{% url 'password_change' %}">change your password</a> here.</p>
+<section class="content__greetings">
+    <h1>Welcome to the International History Students & Historians Group</h1>
+</section>
+<section class="content__introduction">
+    <p>This project is part of the International History Students & Historians Group. Our main goal is
+        to protect the world of heritage and sharing/connecting between students and
+        professionals in the fields of History, Archaeology, Speleology and Anthropology.
+        As protection of heritage concern, we will continue to ensure the protection of the entire historical and
+        cultural heritage of any part of the world.
+        This website gives the possibility for any person to report a monument vicinity that is damaged,
+        in bad condition or scheduled for destruction in real time!</p>
+</section>
+<section class="content__register">
+    <h1>Create an Account, it is quick and easy!</h1>
+    <form method="POST">
+        {{ user_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create an account"></p>
+    </form>
+</section>
+
 
 {% endblock %}
