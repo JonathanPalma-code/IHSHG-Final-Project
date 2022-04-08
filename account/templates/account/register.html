@@ -5,10 +5,12 @@
 {% block content %}
 
     <h1>Create an Account, it is quick and easy!</h1>
-    <form method="POST">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create an account"></p>
-    </form>
+    <section class="form-register">
+        <form method="POST">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Create an account"></p>
+        </form>
+    </section>
 
 {% endblock %} 

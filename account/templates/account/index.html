@@ -5,10 +5,11 @@
 {% block content %}
 
 <section class="content__greetings">
-    <h1>Welcome to the International History Students & Historians Group</h1>
+    <h1>The I.H.S.H.G</h1>
 </section>
 <section class="content__introduction">
-    <p>This project is part of the International History Students & Historians Group. Our main goal is
+    <p>Welcome to the International History Students & Historians Group.
+        This project is part of the International History Students & Historians Group. Our main goal is
         to protect the world of heritage and sharing/connecting between students and
         professionals in the fields of History, Archaeology, Speleology and Anthropology.
         As protection of heritage concern, we will continue to ensure the protection of the entire historical and
@@ -19,7 +20,7 @@
 <section class="content__register">
     <h1>Create an Account, it is quick and easy!</h1>
     <form method="POST">
-        {{ user_form.as_p }}
+        {{ registration_form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Create an account"></p>
     </form>
