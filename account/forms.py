@@ -7,8 +7,10 @@ from django.forms import fields
 from account.models import Profile
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='',
+                                widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(label='',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -24,6 +26,7 @@ class UserRegistrationForm(forms.ModelForm):
             self.fields[field_name].widget.attrs['placeholder'] = field.label
             self.fields[field_name].label = ''
 
+    # Label needs to be defined because of the loop
     password = forms.CharField(label='Password',
         widget=forms.PasswordInput(attrs={'placeholder':'Password'}))
 

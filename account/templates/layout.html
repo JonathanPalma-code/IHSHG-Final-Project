@@ -14,7 +14,8 @@
 <body>
     <header id="header" class="header">
         <span class="header__img">
-            <img src="{% static 'account/assets/logo.png' %}" alt="network" width="50%">
+            <a href="{% url 'index' %}"><img src="{% static 'account/assets/logo.png' %}" alt="logo" width="50%">
+            </a>
         </span>
         
         {% if request.user.is_authenticated %}

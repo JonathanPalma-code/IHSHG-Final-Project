@@ -1,18 +1,20 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}Log-in{% endblock %}
 
 {% block content %}
 
-<h1>Log-in</h1>
-
-    {% if error %}
-    <p>
-        Please enter a correct username and password. Note that both fields may be case-sensitive.
-    </p>
-    {% endif %} 
-    
-    <div class="login-form">
+<section class="content__login">
+    <section class="content__login__map">
+    </section>
+    <section class="content__login__form">
+        <h1>Log-in</h1>
+        {% if error %}
+        <p>
+            Please enter a correct username and password. Note that both fields may be case-sensitive.
+        </p>
+        {% endif %}
         <form action="{% url 'login' %}" method="post">
             {{ login_form.as_p }}
             {% csrf_token %}
@@ -21,6 +23,7 @@
         </form>
         <p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
         <p>If you don't have an account, <a href="{% url 'register' %}">register here</a>.</p>
-    </div>
+    </section>
+</section>
 
 {% endblock %}
