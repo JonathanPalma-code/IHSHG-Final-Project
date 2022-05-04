@@ -1,5 +1,16 @@
 body {
     padding: 1rem;
+    $bg-beige: #F9F7F2;
+
+    background-color: $bg-beige;
+
+    h1 {
+        font-size: large;
+    }
+
+    input {
+        padding: 10;
+    }
 
     .header {
         display: grid;
@@ -35,13 +46,13 @@ body {
         &__greetings {
             grid-column: 1 / 3;
             grid-row: 1 / 2;
-            font-size: xx-large;
             
             h1 {
+                font-size: xx-large;
                 margin: 1%;
             }
         }
-        
+
         &__introduction {
             grid-column: 1/2;
             grid-row: 2/3;
@@ -62,8 +73,8 @@ body {
             text-align: center;
 
             span.helptext {
-                white-space:pre;
-                font-size:smaller;
+                white-space: pre;
+                font-size: smaller;
             }
         }
 
@@ -77,22 +88,68 @@ body {
             width: 100%;
 
             overflow: hidden;
-
+            
+            
             &__map {
                 position: relative;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                width: 250px;
-                height: 250px;
+                width: 350px;
+                height: 350px;
                 border-radius: 50%;
                 background-image: linear-gradient(to right, rgba(0, 0, 0, 0.199), rgba(255, 255, 255, 0.748)), url(../assets/map_login.jpg);
                 background-position: 40%;
                 background-size: cover;
-                transition: ease-in-out .3s;
-                z-index: 2;
-                filter: blur(1px);
+                transition: ease-in-out 1s;
+                z-index: 1;
                 transform: rotate(-10deg);
+                
+                &__error {
+                    position: absolute;
+                    bottom: 120;
+                    transform: rotate(10deg) !important;
+                    font-weight: 800;
+                    text-align: center;
+                    transition: 1s;
+
+                    p {
+                        max-width: max-content;
+                        padding: 5%;
+                        color: antiquewhite;
+                        text-shadow: black 1px 0 10px;
+                    }
+                }
+                
+                &__form {
+                    position: relative;
+                    transform: rotate(0);
+                    line-height: 1.8;
+                    transition: ease-in-out 0.8s;
+                    opacity: 0;
+                }
+
+                &:hover {
+                    border-radius: 0;
+                    width: 100%;
+                    height: 350px;
+                    transform: rotate(0);
+
+                    box-shadow: rgba(0, 0, 0, 1);
+
+                    .content__login__map__form {
+                        transform: translate3d(70%, 0, 0);
+                        opacity: 1;
+                    }
+
+                    .content__login__map__error {
+                        transform: rotate(0) !important;
+                        left: 50;
+                    }
+
+                }
+
+
             }
         }
     }
@@ -111,7 +168,7 @@ body {
                     color: burlywood;
                 }
             }
-            
+
         }
 
         .credits {

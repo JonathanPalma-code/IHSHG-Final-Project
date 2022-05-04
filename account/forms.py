@@ -1,10 +1,16 @@
-from cProfile import label
-from operator import truediv
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import fields
-
 from account.models import Profile
+from django.contrib.auth.forms import PasswordResetForm
+
+
+class UserPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField(label='', widget=forms.EmailInput(attrs={
+        'placeholder': 'Email',
+    }))
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='',

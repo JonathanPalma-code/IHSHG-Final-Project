@@ -6,12 +6,11 @@ from django.utils.http import urlsafe_base64_encode
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import PasswordResetForm
 from django.http import HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm, UserPasswordResetForm
 from .models import Profile
 from django.contrib import messages
 
@@ -67,7 +66,7 @@ def edit_profile(request):
 
 def password_reset_view(request):
 	if request.method == "POST":
-		password_reset_form = PasswordResetForm(request.POST)
+		password_reset_form = UserPasswordResetForm(request.POST)
 		if password_reset_form.is_valid():
 			data = password_reset_form.cleaned_data['email']
 			associated_users = User.objects.filter(Q(email=data))
@@ -95,7 +94,7 @@ def password_reset_view(request):
 					    request, 'A message with reset password instructions has been sent to your inbox.')
 					return redirect("index")
 			messages.error(request, 'An invalid email has been entered.')
-	password_reset_form = PasswordResetForm()
+	password_reset_form = UserPasswordResetForm()
 	return render(request, 'registration/password_reset_form.html', {"password_reset_form": password_reset_form})
 
 def login_view(request):
