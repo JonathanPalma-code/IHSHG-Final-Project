@@ -123,8 +123,7 @@ body .content__login__map:hover .content__login__map__form {
   opacity: 1;
 }
 body .content__login__map:hover .content__login__map__error {
-  transform: rotate(0) !important;
-  left: 50;
+  display: none;
 }
 body .footer .follow-us {
   text-align: center;
