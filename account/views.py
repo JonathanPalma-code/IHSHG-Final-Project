@@ -14,7 +14,7 @@ from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditFor
 from .models import Profile
 from django.contrib import messages
 
-def home(request):
+def index(request):
     registration_form = UserRegistrationForm() 
     if request.method == 'POST':
         registration_form = UserRegistrationForm(request.POST)
@@ -109,7 +109,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'account/index.html')
+                    return redirect('dashboard')
                 else:
                     return HttpResponse('Verify your account.')
             else:
