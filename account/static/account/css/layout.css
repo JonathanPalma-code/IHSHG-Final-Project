@@ -1,0 +1,148 @@
+body {
+  padding: 1rem;
+  background-color: #F9F7F2;
+}
+body h1 {
+  font-size: large;
+}
+body input {
+  padding: 10;
+}
+body .header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+body .header__img {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  object-fit: scale-down;
+}
+body .header__menu {
+  grid-column: 2/4;
+  grid-row: 1/2;
+}
+body .header__user {
+  grid-column: 4/5;
+  grid-row: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2%;
+  margin: 2%;
+  align-items: center;
+}
+body .content__greetings {
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+body .content__greetings h1 {
+  font-size: xx-large;
+  margin: 1%;
+}
+body .content__introduction {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  display: flex;
+  align-items: center;
+  margin: 2% 2% 2% 1%;
+  padding: 2% 2% 2% 1%;
+  font-style: italic;
+  text-align: justify;
+  text-align-last: center;
+}
+body .content__register {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  margin: 2% 5% 2% 5%;
+  padding: 2% 10% 2% 10%;
+  text-align: center;
+}
+body .content__register span.helptext {
+  white-space: pre;
+  font-size: smaller;
+}
+body .content__login {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body .content__login__map {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.199), rgba(255, 255, 255, 0.748)), url(../assets/map_login.jpg);
+  background-position: 40%;
+  background-size: cover;
+  transition: ease-in-out 1s;
+  z-index: 1;
+  transform: rotate(-10deg);
+}
+body .content__login__map__error {
+  position: absolute;
+  bottom: 120;
+  transform: rotate(10deg) !important;
+  font-weight: 800;
+  text-align: center;
+  transition: 1s;
+}
+body .content__login__map__error p {
+  max-width: max-content;
+  padding: 5%;
+  color: antiquewhite;
+  text-shadow: black 1px 0 10px;
+}
+body .content__login__map__form {
+  position: relative;
+  transform: rotate(0);
+  line-height: 1.8;
+  transition: ease-in-out 0.8s;
+  opacity: 0;
+}
+body .content__login__map:hover {
+  border-radius: 0;
+  width: 100%;
+  height: 350px;
+  transform: rotate(0);
+  box-shadow: black;
+}
+body .content__login__map:hover .content__login__map__form {
+  transform: translate3d(70%, 0, 0);
+  opacity: 1;
+}
+body .content__login__map:hover .content__login__map__error {
+  display: none;
+}
+body .footer .follow-us {
+  text-align: center;
+}
+body .footer .follow-us .icons {
+  font-size: xx-large;
+}
+body .footer .follow-us .icons a {
+  padding: 1%;
+  text-decoration: none;
+  color: burlywood;
+}
+body .footer .credits {
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+}
+body .footer .credits i {
+  color: red;
+}
+
+/*# sourceMappingURL=layout.css.map */

@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'account/css/layout.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d5cd48e864.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <header id="header" class="header">
+        <span class="header__img">
+            <a href="{% url 'index' %}"><img src="{% static 'account/assets/logo.png' %}" alt="logo" width="50%">
+            </a>
+        </span>
+        
+        {% if request.user.is_authenticated %}
+        <ul class="header__menu">
+            <li {% if section == 'dashboard' %} class='selected' {% endif %}>
+                <a href="{% url 'dashboard' %}">My Dashboard</a>
+            </li>
+            <li {% if section == 'report' %} class='selected' {% endif %}>
+                <a href="#">Report</a>
+            </li>
+        </ul>
+        {% endif %}
+
+        <span class="header__user">
+            {% if request.user.is_authenticated %}
+            Hello <a href="#">{{ request.user.first_name }}</a>,
+            <ul class="user-menu">
+                <li><a href="{% url 'edit' %}">edit yout profile</a></li>
+                <li><a href="{% url 'password_change' %}">change your password</a></li>
+            </ul>
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Log-in</a>
+            {% endif %}
+        </span>
+    </header>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="Close">x</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        
+    <section id=content class="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <footer class="footer">
+        <div class="follow-us">
+            <p>Follow us on:</p>
+            <span class="icons">
+                <a href='https://www.facebook.com/groups/410056133057002/' target='_blank' rel='noopener noreferrer'>
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href='https://www.instagram.com/ihshg1/?hl=pt' target='_blank' rel='noopener noreferrer'>
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href='https://www.youtube.com/channel/UCPStMEjwVivd40NrjweA44A' target='_blank' rel='noopener noreferrer'>
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href='https://www.twitter.com/IHSHG2?s=09' target='_blank' rel='noopener noreferrer'>
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </span>
+        </div>
+        <div class="credits">
+            <span className='credits__copyrights'>
+                <p>Copyrights © 2022 International History Students & Historians Group - All rights reserved.</p>
+            </span>
+            <span className='credits__developed'>
+                <p>Developed with <i class="fas fa-heart"></i> by Jonathan Palma.</p>
+            </span>
+        </div>
+    </footer>
+</body>
+
+</html>
