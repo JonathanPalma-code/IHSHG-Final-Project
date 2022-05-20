@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<section class="form-edit">
     <h1>Edit your account</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -11,5 +12,6 @@
         {{ profile_form.as_p }}
         <p><input type="submit" value="Save changes"></p>
     </form>
+</section>
 
 {% endblock %}
