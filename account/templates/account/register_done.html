@@ -4,7 +4,9 @@
 
 {% block content %}
 
-    <h1>Welcome {{ new_user.first_name }}</h1>
+<section class="registration-done">
+    <h2>Welcome {{ new_user.first_name }}</h2>
     <p>Your account has been successfully created. Now you can <a href="{% url 'login' %}">Log-in</a></p>
+</section>
 
 {% endblock %}

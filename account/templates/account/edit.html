@@ -5,7 +5,7 @@
 {% block content %}
 
 <section class="form-edit">
-    <h1>Edit your account</h1>
+    <h2>Edit your account</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ user_form.as_p }}

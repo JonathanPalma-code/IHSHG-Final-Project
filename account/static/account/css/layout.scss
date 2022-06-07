@@ -1,82 +1,268 @@
-body {
-    padding: 1rem;
-    $bg-beige: #F9F7F2;
-
-    background-color: $bg-beige;
+* {
+    font-family: 'dumbledor';
 
     h1 {
-        font-size: large;
+        font-size: calc(10px + 8vw);
+        margin: 1%;
+        text-align: center;
     }
 
-    input {
-        padding: 10;
+    h2 {
+        margin: 0;
+        font-size: 3.2vw;
+    }
+
+    h3 {
+        margin: 0;
+        margin-bottom: 1em;
+        font-size: 2.5vw;
+    }
+
+    a {
+        font-size: 2vw;
+    }
+
+    p {
+        font-size: calc(10px + 1.5vmin);
+    }
+}
+
+body {
+    padding: 1rem;
+    $bg-beige: rgb(249, 246, 241);
+    $box-shadow: 0 2px 12px 12px rgba(0, 0, 0, 0.1),
+    0 2px 12px 12px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    margin: 0;
+    $button-shadow: 0 2px 5px 5px rgb(111 104 104 / 30%),
+    0 2px 5px 5px rgb(100 100 132 / 30%);
+
+    .background {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
     }
 
     .header {
+        box-shadow: $box-shadow;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 15% 1fr;
 
         &__img {
+            position: relative;
             grid-column: 1 / 2;
             grid-row: 1 / 2;
             object-fit: scale-down;
+            padding: 2%;
+            margin: 2%;
         }
 
         &__menu {
-            grid-column: 2 / 4;
+            grid-column: 2 / 3;
             grid-row: 1 / 2;
-        }
+            overflow: hidden;
 
-        &__user {
-            grid-column: 4 / 5;
-            grid-row: 1 / 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            img {
+                position: absolute;
+                width: 56.8%;
+                left: 20%;
+            }
+
+            .menu-list {
+                display: flex;
+                justify-content: flex-end;
+                margin: 5% 2% 0 0;
+                list-style: none;
+                position: relative;
+                padding: 2%;
+
+                li {
+                    border-left: 2px solid rgb(120, 120, 120);
+                    padding: 1% 1%;
+                    min-width: 15%;
+                    text-align: center;
+                    transition-duration: 0.5s;
+
+                    &:hover,
+                    &:focus-within {
+                        border-left: 2px solid red;
+                        transition-duration: 0.5s;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: rgb(120, 120, 120);
+                        transition-duration: 0.5s;
+
+                        &:hover {
+                            color: black;
+                            transition-duration: 0.5s;
+                        }
+                    }
+
+                    .dropdown {
+
+                        &__menu {
+                            display: block;
+                            visibility: hidden;
+                            opacity: 0;
+                            position: absolute;
+                            margin: 0;
+                            padding: 0;
+                            transition: 1s;
+                            font-size: smaller;
+                            min-width: 14.5%;
+                            list-style: none;
+                            transition: all 0.5s ease;
+                            position: fixed;
+
+                            li {
+                                border-left: none;
+                            }
+
+                            a {
+                                background-color: transparent;
+                                border: transparent;
+                                border-bottom: 1px solid rgb(120, 120, 120);
+                                display: block;
+                                padding: 5% 2%;
+                                margin: 5% 2%;
+
+                                &:hover {
+                                    color: black;
+                                    border-bottom: 1px solid red;
+                                    transition-duration: 0.5s;
+                                }
+                            }
+                        }
+
+                        &__user {
+
+                            background-color: transparent;
+                            border: transparent;
+                            cursor: pointer;
+                            color: rgb(82, 82, 82);
+                            font-size: 2vw;
+
+                            &:hover,
+                            &:focus-within {
+                                color: black;
+                            }
+
+                            &:focus-within+ul {
+                                background-color: white;
+                                box-shadow: 0 8px 2px 0 rgba(0, 0, 0, 0.5);
+                                visibility: visible;
+                                opacity: 1;
+                                transition-duration: 0.5s;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
     .content {
+        box-shadow: $box-shadow;
+        background-color: $bg-beige;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         padding: 2%;
-        margin: 2%;
+        margin: 2% 2% 0.5% 2%;
         align-items: center;
+        overflow: hidden;
 
         &__greetings {
             grid-column: 1 / 3;
             grid-row: 1 / 2;
-            
-            h1 {
-                font-size: xx-large;
-                margin: 1%;
-            }
-        }
-
-        &__introduction {
-            grid-column: 1/2;
-            grid-row: 2/3;
-            display: flex;
-            align-items: center;
-            margin: 2% 2% 2% 1%;
-            padding: 2% 2% 2% 1%;
-            font-style: italic;
             text-align: justify;
+            font-size: 2vw;
             text-align-last: center;
-        }
 
-        &__register {
-            grid-column: 2 / 3;
-            grid-row: 2 / 3;
-            margin: 2% 5% 2% 5%;
-            padding: 2% 10% 2% 10%;
-            text-align: center;
+            .circle-sketch {
+                font-family: 'DaVinci';
+                font-weight: 500;
+                position: relative;
+                color: black;
 
-            span.helptext {
-                white-space: pre;
-                font-size: smaller;
+                // &::before {
+                //     content: "";
+                //     z-index: 1;
+                //     left: -2%;
+                //     top: -17%;
+                //     border: 4px red solid;
+                //     position: absolute;
+                //     border-right-color: transparent;
+                //     width: 100%;
+                //     height: 1em;
+                //     transform: rotate(2deg);
+                //     opacity: 1;
+                //     border-radius: 50%;
+                //     padding: 0.1em 0.25em;
+                // }
+
+                // &::after {
+                //     content: "";
+                //     z-index: 1;
+                //     left: -2%;
+                //     top: 2%;
+                //     padding: 0.1em 0.25em;
+                //     border: 4px red solid;
+                //     border-left-color: transparent;
+                //     border-top-color: transparent;
+                //     position: absolute;
+                //     width: 100%;
+                //     height: 1em;
+                //     transform: rotate(-1deg);
+                //     opacity: 1;
+                //     border-radius: 50%;
+                // }
+            }
+
+            p {
+                font-family: 'dumbledor';
             }
         }
+
+        &__register-template {
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+            position: relative;
+            overflow: hidden;
+
+            &__sketch {
+                position: absolute;
+                left: 25%;
+                width: 50%;
+
+                img {
+                    width: 100%;
+                }
+
+            }
+
+            &__register {
+                position: relative;
+                width: 25%;
+                margin: 5% 5%;
+                padding: 2% 2%;
+                left: 45%;
+                backdrop-filter: contrast(130%) brightness(120%) blur(2px);
+                background: radial-gradient(ellipse at 16.7% -10%, rgba(255, 255, 255, 0.44) 24%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 45%, rgba(255, 255, 255, 0.1));
+                border-radius: 25px;
+                box-shadow: 0 20px 90px rgb(255 255 255 / 50%) inset, 0 -1000px 20px rgb(149 97 14 / 8%) inset, 0 -2px 6px rgb(255 255 255 / 25%);
+
+                span.helptext {
+                    display: none;
+                }
+            }
+        }
+
 
         &__login {
             grid-column: 1 / 3;
@@ -86,17 +272,15 @@ body {
             align-items: center;
             height: 100%;
             width: 100%;
-
             overflow: hidden;
-            
-            
+
             &__map {
                 position: relative;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                width: 350px;
-                height: 350px;
+                width: calc(10px + 25vw);
+                height: calc(10px + 25vw);
                 border-radius: 50%;
                 background-image: linear-gradient(to right, rgba(0, 0, 0, 0.199), rgba(255, 255, 255, 0.748)), url(../assets/map_login.jpg);
                 background-position: 40%;
@@ -104,7 +288,7 @@ body {
                 transition: ease-in-out 1s;
                 z-index: 1;
                 transform: rotate(-10deg);
-                
+
                 &__error {
                     position: absolute;
                     bottom: 120;
@@ -113,6 +297,15 @@ body {
                     text-align: center;
                     transition: 1s;
 
+                    ::before {
+                        content: "X ";
+                        font-family: 'Macondo';
+                        font-style: italic;
+                        font-size: 50px;
+                        color: red;
+                        margin-right: 2%;
+                    }
+
                     p {
                         max-width: max-content;
                         padding: 5%;
@@ -120,21 +313,28 @@ body {
                         text-shadow: black 1px 0 10px;
                     }
                 }
-                
+
                 &__form {
                     position: relative;
+                    width: 30vw;
                     transform: rotate(0);
-                    line-height: 1.8;
                     transition: ease-in-out 0.8s;
                     opacity: 0;
+                    position: absolute;
+                    padding: 2%;
+                    right: 55%;
+                    backdrop-filter: contrast(130%) brightness(120%) blur(2px);
+                    background: radial-gradient(ellipse at 16.7% -10%, rgba(255, 255, 255, 0.44) 24%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.2) 45%, rgba(255, 255, 255, 0.1));
+                    border-radius: 25px;
+                    box-shadow: 0 20px 90px rgb(255 255 255 / 50%) inset, 0 -1000px 20px rgb(149 97 14 / 8%) inset, 0 -2px 6px rgb(255 255 255 / 25%);
                 }
 
-                &:hover {
+                &:hover,
+                &:focus-within {
                     border-radius: 0;
                     width: 100%;
-                    height: 350px;
+                    height: 30vw;
                     transform: rotate(0);
-
                     box-shadow: rgba(0, 0, 0, 1);
 
                     .content__login__map__form {
@@ -148,12 +348,18 @@ body {
 
                 }
 
-
+                .helpers {
+                    p {
+                        margin: 0;
+                    }
+                }
             }
         }
     }
 
     .footer {
+        box-shadow: $box-shadow;
+        padding: 2%;
 
         .follow-us {
             text-align: center;
@@ -164,7 +370,7 @@ body {
                 a {
                     padding: 1%;
                     text-decoration: none;
-                    color: burlywood;
+                    color: rgb(245, 231, 209);
                 }
             }
 
@@ -180,4 +386,72 @@ body {
             }
         }
     }
+
+    input[type=text],
+    input[type=email],
+    input[type=password] {
+        font-size: calc(10px + 1.5vmin);
+        padding: 1% 2%;
+        border: none;
+        background-color: transparent;
+        border-bottom: 0.5px solid gray;
+        outline: none;
+        transition-duration: 0.5s;
+
+        &:focus-visible {
+            border-bottom: 1px solid black;
+            transition-duration: 0.5s;
+        }
+    }
+
+    input[type=submit] {
+        font-size: calc(10px + 1.5vmin);
+        background-color: black;
+        color: antiquewhite;
+        border-radius: 25px;
+        padding: 5px 10px;
+        margin: 5px 0;
+        cursor: pointer;
+        transition-duration: 0.5s;
+
+        &:hover,
+        &:focus-visible {
+            box-shadow: $button-shadow;
+            transition-duration: 0.5s;
+        }
+    }
+
+    .errorlist {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        font-style: italic;
+        font-size: small;
+        margin-bottom: 0;
+
+        &::before {
+            content: "X ";
+            font-family: 'Macondo';
+            font-style: italic;
+            font-size: 50px;
+            color: red;
+            margin-right: 2%;
+        }
+    }
+
+    ::placeholder {
+        color: black;
+        font-weight: 700;
+    }
+}
+
+@font-face {
+    font-family: 'dumbledor';
+    src: url('./../fonts/dumbledor.ttf');
+}
+
+@font-face {
+    font-family: 'DaVinci';
+    src: url('./../fonts/DaVinci.ttf');
 }

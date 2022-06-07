@@ -1,29 +1,44 @@
 {% extends "layout.html " %}
 
+{% load static %}
+
 {% block title %}I.H.S.H.G.{% endblock %}
 
 {% block content %}
 
 <section class="content__greetings">
-    <h1>The I.H.S.H.G</h1>
-</section>
-<section class="content__introduction">
-    <p>Welcome to the International History Students & Historians Group.
+    <h1><span class="circle-sketch">" Knowledge is Power "</span></h1>
+    <p>
+        Welcome to the International History Students & Historians Group.
         This project is part of the International History Students & Historians Group. Our main goal is
         to protect the world of heritage and sharing/connecting between students and
         professionals in the fields of History, Archaeology, Speleology and Anthropology.
         As protection of heritage concern, we will continue to ensure the protection of the entire historical and
         cultural heritage of any part of the world.
+    </p>
+    <p>
         This website gives the possibility for any person to report a monument vicinity that is damaged,
-        in bad condition or scheduled for destruction in real time!</p>
+        in bad condition or scheduled for destruction in real time!
+    </p>
+    <p>
+        Be part of our team!
+    </p>
 </section>
-<section class="content__register">
-    <h1>Create an Account, it is quick and easy!</h1>
-    <form method="POST">
-        {{ registration_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create an account"></p>
-    </form>
+<section class="content__register-template">
+    <section class="content__register-template__sketch">
+        <img src="{% static 'account/assets/torre_de_belem.png'%}" alt="sketch of belen">
+    </section>
+    <section class="content__register-template__register">
+        <h2>Create an Account.</h2>
+        <h3>It is quick and easy!</h3>
+        <hr>
+        <form method="POST">
+            {{ registration_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Create an account"></p>
+        </form>
+        <hr>
+    </section>
 </section>
 
 {% endblock %}

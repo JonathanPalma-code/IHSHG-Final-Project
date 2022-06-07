@@ -129,20 +129,26 @@ def login_view(request):
 def register_view(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
+
         if user_form.is_valid():
+            data = user_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if not associated_users.exists():
+                # Create a new user object but avoid saving it yet
+                new_user = user_form.save(commit=False)
 
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
+                # Set the chosen password
+                new_user.set_password(user_form.cleaned_data['password'])
 
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-
-            # Save the user object
-            new_user.save()
-            Profile.objects.create(user=new_user)
+                # Save the user object
+                new_user.save()
+                Profile.objects.create(user=new_user)
+            else :
+                email_exists = 'The email introduced, already exists.'
 
             return render(request, 'account/register_done.html', {
-                'new_user': new_user
+                'new_user': new_user,
+                'email_exists': email_exists
             })
     else:
         user_form = UserRegistrationForm()

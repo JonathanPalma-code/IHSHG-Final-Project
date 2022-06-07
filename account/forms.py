@@ -1,3 +1,4 @@
+from dataclasses import field, fields
 from django import forms
 from django.contrib.auth.models import User
 from account.models import Profile
@@ -31,6 +32,12 @@ class UserRegistrationForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             self.fields[field_name].widget.attrs['placeholder'] = field.label
             self.fields[field_name].label = ''
+
+        # add class to the input text tag 'Username'
+        # self.fields['username'].widget.attrs['class'] = 'username'
+
+        # add tool tip to the input text tag 'Username'
+        self.fields['username'].widget.attrs['title'] = 'Required. 150 characters or fewer. Letters,digits and @/./+/-/_ only.'
 
     # Label needs to be defined because of the loop
     password = forms.CharField(label='Password',
