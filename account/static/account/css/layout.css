@@ -272,22 +272,24 @@ body .footer {
 }
 body .footer .follow-us {
   text-align: center;
-}
-body .footer .follow-us .icons {
-  font-size: xx-large;
+  position: relative;
 }
 body .footer .follow-us .icons a {
+  font-size: calc(10px + 2vw);
   padding: 1%;
   text-decoration: none;
   color: #f5e7d1;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.8));
 }
 body .footer .credits {
   display: flex;
   justify-content: space-between;
-  font-size: small;
 }
 body .footer .credits i {
   color: red;
+}
+body .footer .credits p {
+  font-size: calc(10px + 0.5vmin);
 }
 body input[type=text],
 body input[type=email],

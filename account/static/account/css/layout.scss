@@ -363,14 +363,16 @@ body {
 
         .follow-us {
             text-align: center;
+            position: relative;
 
             .icons {
-                font-size: xx-large;
-
+                
                 a {
+                    font-size: calc(10px + 2vw);
                     padding: 1%;
                     text-decoration: none;
                     color: rgb(245, 231, 209);
+                    filter: drop-shadow(3px 5px 5px rgb(0 0 0 / 0.8));
                 }
             }
 
@@ -379,10 +381,13 @@ body {
         .credits {
             display: flex;
             justify-content: space-between;
-            font-size: small;
 
             i {
                 color: red;
+            }
+
+            p {
+                font-size: calc(10px + 0.5vmin);
             }
         }
     }
